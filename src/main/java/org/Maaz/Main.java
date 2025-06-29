@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         Student s1 = new Student();
-        s1.setRollNo(11);
+        s1.setRollNo(1);
         s1.setsName("Miss you so much meri hathni :D");
         s1.setsAge(25);
 
@@ -31,19 +31,29 @@ public class Main {
 
         Session session = sF.openSession();
 
-        s2 = session.find(Student.class,10);
+//        s2 = session.find(Student.class,10);
 
         Transaction transaction = session.beginTransaction();
-        session.persist(s1);
 
+        s1 = session.find(Student.class,11);
+
+// ===================== MARK: Db main entry k liye use hoata he  =========================
+//        session.persist(s1);
+
+// ===================== MARK: Update k liye merge use hota he =========================
+//        session.merge(s1);
+
+
+
+// ===================== MARK: Delete k liye remove use hota he =========================
+        session.remove(s1);
 
         transaction.commit();
-
         session.close();
         sF.close();
 
         // Print krna he yahan pr
-        System.out.println(s2);
+//        System.out.println(s2);
 
     }
 }
