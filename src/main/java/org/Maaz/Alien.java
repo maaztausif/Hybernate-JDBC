@@ -14,7 +14,7 @@ public class Alien {
     private String aname;
     //@Transient  yehata deta he column
     private  String tech;
-    @ManyToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Laptop> laptops;
 
     public List<Laptop> getLaptops() {

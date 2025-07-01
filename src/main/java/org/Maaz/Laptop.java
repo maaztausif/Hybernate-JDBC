@@ -13,8 +13,6 @@ public class Laptop {
     private String model;
     private int ram;
 
-    @ManyToMany(mappedBy = "laptops")
-    private List<Alien> alien;
 
     public String getBand() {
         return band;
@@ -48,13 +46,6 @@ public class Laptop {
         this.ram = ram;
     }
 
-    public List<Alien> getAlien() {
-        return alien;
-    }
-
-    public void setAlien(List<Alien> alien) {
-        this.alien = alien;
-    }
 
     @Override
     public String toString() {

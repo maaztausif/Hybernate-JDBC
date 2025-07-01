@@ -36,27 +36,19 @@ public class Main {
 
         Alien a1 = new Alien();
         a1.setAid(0);
-        a1.setAname("Tasbeen");
-        a1.setTech("Java");
+        a1.setAname("Ta");
+        a1.setTech("test");
 
         Alien a2 = new Alien();
         a2.setAid(1);
-        a2.setAname("Tasbeen Janu");
-        a2.setTech("c#");
+        a2.setAname("Tabbo ");
+        a2.setTech(":(");
 
-        Alien a3 = new Alien();
-        a3.setAid(2);
-        a3.setAname("Tasbeen Hathni");
-        a3.setTech("Flutter");
 
 
         a1.setLaptops(Arrays.asList(l1,l2));
-        a2.setLaptops(Arrays.asList(l1,l3));
-        a3.setLaptops(Arrays.asList(l3));
+        a2.setLaptops(Arrays.asList(l3));
 
-        l1.setAlien(Arrays.asList(a1,a2));
-        l2.setAlien(Arrays.asList(a1));
-        l3.setAlien(Arrays.asList(a2,a3));
 
 
 // ===================== MARK: Long version =========================
@@ -78,18 +70,25 @@ public class Main {
 
         session.persist(a1);
         session.persist(a2);
-        session.persist(a3);
-        
+
         session.persist(l1);
         session.persist(l2);
         session.persist(l3);
 
         transaction.commit();
 
-        Alien a4 = session.find(Alien.class,2);
-        System.out.println(a2);
+//        Alien a4 = session.find(Alien.class,2);
+//        System.out.println(a2);
 
         session.close();
+
+
+        Session session1 = sF.openSession();
+
+        Alien newData = session1.find(Alien.class,1);
+        System.out.println("test "+newData);
+
+        session1.close();
         sF.close();
 
        //  Print krna he yahan pr
