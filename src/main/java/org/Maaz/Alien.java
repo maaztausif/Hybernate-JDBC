@@ -1,15 +1,29 @@
 package org.Maaz;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
+@Table(name = "alien_table")
 public class Alien {
 
     @Id
     private int aid;
+    @Column(name = "alien_name")
     private String aname;
+    //@Transient  yehata deta he column
     private  String tech;
+    @ManyToMany
+    private List<Laptop> laptops;
+
+    public List<Laptop> getLaptops() {
+        return laptops;
+    }
+
+    public void setLaptops(List<Laptop> laptops) {
+        this.laptops = laptops;
+    }
 
     public int getAid() {
         return aid;
