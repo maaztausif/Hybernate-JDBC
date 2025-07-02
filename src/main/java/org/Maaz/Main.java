@@ -4,95 +4,41 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+//import javax.management.Query;
+import org.hibernate.query.Query;
+
 import java.io.Console;
 import java.io.Writer;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class Main {
     public static void main(String[] args) {
 
-        Laptop l1 = new Laptop();
-        l1.setId(0);
-        l1.setModel("2024");
-        l1.setBand("Macbook");
-        l1.setRam(8);
-
-        Laptop l2 = new Laptop();
-        l2.setId(1);
-        l2.setModel("2022");
-        l2.setBand("assus");
-        l2.setRam(22);
-
-        Laptop l3 = new Laptop();
-        l3.setId(2);
-        l3.setModel("2025");
-        l3.setBand("Dell");
-        l3.setRam(12);
-
-
-
-        Alien a1 = new Alien();
-        a1.setAid(0);
-        a1.setAname("Ta");
-        a1.setTech("test");
-
-        Alien a2 = new Alien();
-        a2.setAid(1);
-        a2.setAname("Tabbo ");
-        a2.setTech(":(");
-
-
-
-        a1.setLaptops(Arrays.asList(l1,l2));
-        a2.setLaptops(Arrays.asList(l3));
-
-
-
-// ===================== MARK: Long version =========================
-
-//        Configuration cfg = new Configuration();
-//        cfg.addAnnotatedClass(org.Maaz.Student.class);
-//        cfg.configure();
-
-// ===================== MARK: Short form refactoring =========================
 
         SessionFactory sF = new Configuration()
-                .addAnnotatedClass(org.Maaz.Alien.class)
-                .addAnnotatedClass(org.Maaz.Laptop.class)
+                .addAnnotatedClass(Laptop.class)
                 .configure()
-                .buildSessionFactory();       //cfg.buildSessionFactory();
+                .buildSessionFactory();
 
         Session session = sF.openSession();
-        Transaction transaction = session.beginTransaction();
 
-        session.persist(a1);
-        session.persist(a2);
+        String brand = "assus";
 
-        session.persist(l1);
-        session.persist(l2);
-        session.persist(l3);
+        Query query = session.createQuery ("select band,model from Laptop where band like ?1");
+        query.setParameter(1,brand);
+        List<Object[]> data = query.list();
 
-        transaction.commit();
-
-//        Alien a4 = session.find(Alien.class,2);
-//        System.out.println(a2);
-
+        for (Object[] newData: data){
+            System.out.println((String) newData[0]);
+            System.out.println((String) newData[1]);
+        }
+        System.out.println(data);
         session.close();
-
-
-        Session session1 = sF.openSession();
-
-        Alien newData = session1.find(Alien.class,1);
-        System.out.println("test "+newData);
-
-        session1.close();
         sF.close();
-
-       //  Print krna he yahan pr
-//        System.out.println(s2);
 
     }
 }
