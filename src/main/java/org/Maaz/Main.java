@@ -37,6 +37,15 @@ public class Main {
             System.out.println((String) newData[1]);
         }
         System.out.println(data);
+
+System.out.println("-==-=-");
+        Laptop lap = session.get(Laptop.class,1);// always hit
+        System.out.println("-==-=-");
+
+        Laptop lap1 = session.byId(Laptop.class).getReference(1); //use hoga to hit kare ga warna nai kare ga
+//        System.out.println(lap1);
+        System.out.println("-==-=-");
+
         session.close();
         sF.close();
 
