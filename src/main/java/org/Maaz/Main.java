@@ -25,28 +25,10 @@ public class Main {
                 .buildSessionFactory();
 
         Session session = sF.openSession();
-
-        String brand = "assus";
-
-        Query query = session.createQuery ("select band,model from Laptop where band like ?1");
-        query.setParameter(1,brand);
-        List<Object[]> data = query.list();
-
-        for (Object[] newData: data){
-            System.out.println((String) newData[0]);
-            System.out.println((String) newData[1]);
-        }
-        System.out.println(data);
-
-System.out.println("-==-=-");
-        Laptop lap = session.get(Laptop.class,1);// always hit
-        System.out.println("-==-=-");
-
-        Laptop lap1 = session.byId(Laptop.class).getReference(1); //use hoga to hit kare ga warna nai kare ga
-//        System.out.println(lap1);
-        System.out.println("-==-=-");
-
+        Laptop lap = session.get(Laptop.class,1);
+        System.out.println(lap);
         session.close();
+
         sF.close();
 
     }
